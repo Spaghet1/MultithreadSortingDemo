@@ -1,6 +1,6 @@
 #include <stdint.h>
-#include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 void merge(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32_t right) {
 	uint32_t leftPtr = left;
@@ -26,6 +26,7 @@ void mergeSortHelper(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32
 
 void mergeSort(int32_t* array, uint32_t length) {
 	int32_t* copyArray = malloc(sizeof(int32_t) * length);
+	memcpy(copyArray, array, sizeof(int32_t) * length);
 	mergeSortHelper(array, copyArray, 0, length);
 	free(copyArray);
 }
