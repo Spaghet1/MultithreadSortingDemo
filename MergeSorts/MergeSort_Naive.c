@@ -1,6 +1,7 @@
 #include "mergesort.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 static void merge(int32_t* toArray, int32_t* leftHalf, int32_t* rightHalf, uint32_t size) {
 	uint32_t leftPtr = 0;
@@ -16,8 +17,8 @@ static void merge(int32_t* toArray, int32_t* leftHalf, int32_t* rightHalf, uint3
 
 static void mergeSortHelper(int32_t* array, uint32_t size) {
 	if (size == 1) return;
-	int32_t* half1 = malloc(sizeof(int32_t) * size / 2);
-	memcpy(half1, array, sizeof(int32_t) * size / 2);
+	int32_t* half1 = malloc(sizeof(int32_t) * (size / 2));
+	memcpy(half1, array, sizeof(int32_t) * (size / 2));
 	mergeSortHelper(half1, size / 2);
 	int32_t* half2 = malloc(sizeof(int32_t) * (size - size / 2));
 	memcpy(half2, array + size / 2, sizeof(int32_t) * (size - size / 2));
