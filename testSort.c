@@ -4,21 +4,23 @@
 #include <time.h>
 
 #define MAX_ITERATIONS 100
+#define MAX_SIZE 100
 
 int main() {
 	srand(time(NULL));
-	for (int i = 0; i < 1000; i++) {
-		uint32_t size = rand() % 20 + 1;
+	for (int i = 0; i < MAX_ITERATIONS; i++) {
+		uint32_t size = rand() % MAX_SIZE + 1;
 		int32_t* array = malloc(sizeof(int32_t) * (size));
 		for (int j = 0; j < size; j++) array[j] = rand();
-		mergeSortNaive(array, size);
+		mergeSortMultiThreaded(array, size);
 		for (int j = 0; j < size - 1; j++) {
 			if(array[j] > array[j + 1]) {
-				fprintf(stderr, "test failed");
+				fprintf(stderr, "test failed!\n");
 				return 1;
 			}
 		}
+		// printf("test succeeded\n");
 	}
-	printf("test succeeded");
+	printf("all tests succeeded\n");
 	return 0;
 }

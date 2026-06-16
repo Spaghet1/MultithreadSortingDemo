@@ -39,7 +39,7 @@ static void* mergeSortHelper(void* argPtr) {
 	HelperArgs rightArgs = {
 		.fromArray = args->toArray,
 		.toArray = args->fromArray,
-		.left = (args->left + args->right) / 2 + 1,
+		.left = (args->left + args->right) / 2,
 		.right = args->right,
 	};
 	mergeSortHelper(&rightArgs);
@@ -48,7 +48,7 @@ static void* mergeSortHelper(void* argPtr) {
 	return NULL;
 }
 
-void mergeSort2Array(int32_t* array, uint32_t size) {
+void mergeSortMultiThreaded(int32_t* array, uint32_t size) {
 	int32_t* copyArray = malloc(sizeof(int32_t) * size);
 	memcpy(copyArray, array, sizeof(int32_t) * size);
 	HelperArgs args = {
