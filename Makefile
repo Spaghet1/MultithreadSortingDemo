@@ -13,9 +13,11 @@ test: $(OBJS) ObjectFiles/testSort.o
 obj: $(OBJS)
 
 ObjectFiles/%.o: %.c
+	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
 ObjectFiles/testSort.o: testSort.c
+	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
