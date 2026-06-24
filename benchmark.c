@@ -4,9 +4,6 @@
 #include <time.h>
 #include <string.h>
 
-#define MAX_ITERATIONS 1024
-#define MAX_SIZE 1024
-
 int main(int argc, char** argv) {
 	if (argc != 2) {
 		fprintf(stderr, "usage: <EXEC> <SORT>\n");
