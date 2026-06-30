@@ -5,9 +5,11 @@
 #include <time.h>
 #include <string.h>
 
+extern int threadDepth;
+
 int main(int argc, char** argv) {
-	if (argc != 3) {
-		fprintf(stderr, "usage: <EXEC> <SORT> <SIZE>\n");
+	if (argc < 3 || argc > 4) {
+		fprintf(stderr, "usage: <EXEC> <SORT> <SIZE> <OPT: MAX THREAD DEPTH>\n");
 		printFuncs();
 		return 1;
 	}
@@ -21,6 +23,7 @@ int main(int argc, char** argv) {
 		fprintf(stderr, "size should be > 0\n");
 		return 1;
 	}
+	if (argc == 4) threadDepth = atoi(argv[3]);
 	srand(time(NULL));
 	int32_t* array = malloc(sizeof(int32_t) * (size));
 	for (unsigned int j = 0; j < size; j++) array[j] = rand();

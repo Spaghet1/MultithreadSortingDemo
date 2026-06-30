@@ -8,7 +8,10 @@ typedef struct HelperArgs {
 	int32_t* toArray;
 	size_t left;
 	size_t right;
+	int depth;
 } HelperArgs;
+
+int threadDepth;
 
 static void merge(int32_t* toArray, int32_t* fromArray, size_t left, size_t right) {
 	size_t leftPtr = left;
@@ -33,17 +36,20 @@ static void* mergeSortHelper(void* argPtr) {
 		.toArray = args->fromArray,
 		.left = args->left,
 		.right = (args->left + args->right) / 2,
+		.depth = args->depth + 1
 	};
 	pthread_t leftThread;
-	pthread_create(&leftThread, NULL, mergeSortHelper, &leftArgs);
+	if (leftArgs.depth > threadDepth) mergeSortHelper(&leftArgs);
+	else pthread_create(&leftThread, NULL, mergeSortHelper, &leftArgs);
 	HelperArgs rightArgs = {
 		.fromArray = args->toArray,
 		.toArray = args->fromArray,
 		.left = (args->left + args->right) / 2,
 		.right = args->right,
+		.depth = args->depth + 1
 	};
 	mergeSortHelper(&rightArgs);
-	pthread_join(leftThread, NULL);
+	if (leftArgs.depth <= threadDepth) pthread_join(leftThread, NULL);
 	merge(args->toArray, args->fromArray, args->left, args->right);
 	return NULL;
 }
@@ -56,6 +62,7 @@ void mergeSortMultiThreaded(int32_t* array, size_t size) {
 		.toArray = array,
 		.left = 0,
 		.right = size,
+		.depth = 0
 	};
 	mergeSortHelper(&args);
 	free(copyArray);
