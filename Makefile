@@ -1,14 +1,17 @@
 CC = gcc
 CFLAGS = -g -Wall -Wextra -pthread
 
-SRC_DIRS = MergeSorts
+SRC_DIRS = MergeSorts Utils
 VPATH = $(SRC_DIRS)
 
 SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c))
 OBJS = $(patsubst %.c, ObjectFiles/%.o, $(notdir $(SRCS)))
 
-test: $(OBJS) ObjectFiles/testSort.o
-	$(CC) $(CFLAGS) $^ -o testSort
+test: $(OBJS) ObjectFiles/testsort.o
+	$(CC) $(CFLAGS) $^ -o testsort
+
+benchmark: $(OBJS) ObjectFiles/benchmark.o
+	$(CC) $(CFLAGS) $^ -o benchmark
 
 obj: $(OBJS)
 
@@ -16,7 +19,11 @@ ObjectFiles/%.o: %.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
-ObjectFiles/testSort.o: testSort.c
+ObjectFiles/testsort.o: testsort.c
+	mkdir -p ObjectFiles
+	$(CC) $(CFLAGS) -c $< -o $@
+
+ObjectFiles/benchmark.o: benchmark.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 

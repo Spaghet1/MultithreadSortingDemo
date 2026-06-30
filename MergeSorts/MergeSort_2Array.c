@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void merge(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32_t right) {
-	uint32_t leftPtr = left;
-	uint32_t rightPtr = (left + right) / 2;
-	uint32_t toPtr = left;
+static void merge(int32_t* toArray, int32_t* fromArray, size_t left, size_t right) {
+	size_t leftPtr = left;
+	size_t rightPtr = (left + right) / 2;
+	size_t toPtr = left;
 	while (leftPtr < (left + right) / 2 && rightPtr < right) {
 		if (fromArray[leftPtr] < fromArray[rightPtr]) toArray[toPtr++] = fromArray[leftPtr++];
 		else toArray[toPtr++] = fromArray[rightPtr++];
@@ -14,7 +14,7 @@ static void merge(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32_t 
 	while (rightPtr < right) toArray[toPtr++] = fromArray[rightPtr++];
 }
 
-static void mergeSortHelper(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32_t right) {
+static void mergeSortHelper(int32_t* toArray, int32_t* fromArray, size_t left, size_t right) {
 	if (left + 1 == right) {
 		toArray[left] = fromArray[left];
 		return;
@@ -24,7 +24,7 @@ static void mergeSortHelper(int32_t* toArray, int32_t* fromArray, uint32_t left,
 	merge(toArray, fromArray, left, right);
 }
 
-void mergeSort2Array(int32_t* array, uint32_t size) {
+void mergeSort2Array(int32_t* array, size_t size) {
 	int32_t* copyArray = malloc(sizeof(int32_t) * size);
 	memcpy(copyArray, array, sizeof(int32_t) * size);
 	mergeSortHelper(array, copyArray, 0, size);

@@ -6,14 +6,14 @@
 typedef struct HelperArgs {
 	int32_t* fromArray;
 	int32_t* toArray;
-	uint32_t left;
-	uint32_t right;
+	size_t left;
+	size_t right;
 } HelperArgs;
 
-static void merge(int32_t* toArray, int32_t* fromArray, uint32_t left, uint32_t right) {
-	uint32_t leftPtr = left;
-	uint32_t rightPtr = (left + right) / 2;
-	uint32_t toPtr = left;
+static void merge(int32_t* toArray, int32_t* fromArray, size_t left, size_t right) {
+	size_t leftPtr = left;
+	size_t rightPtr = (left + right) / 2;
+	size_t toPtr = left;
 	while (leftPtr < (left + right) / 2 && rightPtr < right) {
 		if (fromArray[leftPtr] < fromArray[rightPtr]) toArray[toPtr++] = fromArray[leftPtr++];
 		else toArray[toPtr++] = fromArray[rightPtr++];
@@ -48,7 +48,7 @@ static void* mergeSortHelper(void* argPtr) {
 	return NULL;
 }
 
-void mergeSortMultiThreaded(int32_t* array, uint32_t size) {
+void mergeSortMultiThreaded(int32_t* array, size_t size) {
 	int32_t* copyArray = malloc(sizeof(int32_t) * size);
 	memcpy(copyArray, array, sizeof(int32_t) * size);
 	HelperArgs args = {
