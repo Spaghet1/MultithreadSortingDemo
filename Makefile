@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g -Wall -Wextra -pthread
 
-SRC_DIRS = MergeSorts Utils
+SRC_DIRS = MergeSorts Utils MiscSorts
 VPATH = $(SRC_DIRS)
 
 SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c))

@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include "../MiscSorts/miscsort.h"
 #include "../MergeSorts/mergesort.h"
 #include "SortFunc.h"
 
@@ -11,7 +12,8 @@ typedef struct sortFunc {
 static const sortFunc map[] = {
 	{"MergeSort_Naive", mergeSortNaive},
 	{"MergeSort_2Array", mergeSort2Array},
-	{"MergeSort_MultiThreaded", mergeSortMultiThreaded}
+	{"MergeSort_MultiThreaded", mergeSortMultiThreaded},
+	{"qsort", qsortWrapper}
 };
 
 void (*findFunc(char* sortName))(int32_t*, size_t) {

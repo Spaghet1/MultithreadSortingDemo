@@ -1,5 +1,6 @@
 #include "MergeSorts/mergesort.h"
 #include "Utils/SortFunc.h"
+#include "Utils/timing.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -27,6 +28,10 @@ int main(int argc, char** argv) {
 	srand(time(NULL));
 	int32_t* array = malloc(sizeof(int32_t) * (size));
 	for (unsigned int j = 0; j < size; j++) array[j] = rand();
+	struct timespec start, end;
+	clock_gettime(CLOCK_MONOTONIC, &start);
 	func(array, size);
+	clock_gettime(CLOCK_MONOTONIC, &end);
+	printf("%f\n", timespecToDouble(timeDiff(start, end)));
 	return 0;
 }
