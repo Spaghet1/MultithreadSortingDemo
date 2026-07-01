@@ -28,4 +28,5 @@ ObjectFiles/benchmark.o: benchmark.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm testSort
+	rm testsort
+	rm benchmark
