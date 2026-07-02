@@ -6,8 +6,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_ITERATIONS 1024
-#define MAX_SIZE 1024
+#define MAX_ITERATIONS 100
+#define MAX_SIZE 10000
+
+int comparatorTest(const void* a, const void* b) {
+	return (*(int32_t*)a - *(int32_t*)b);
+}
 
 extern int threadDepth;
 
@@ -29,10 +33,19 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < MAX_ITERATIONS; i++) {
 		uint32_t size = rand() % MAX_SIZE + 1;
 		int32_t* array = malloc(sizeof(int32_t) * (size));
-		for (unsigned int j = 0; j < size; j++) array[j] = rand();
+		int32_t* copyArray = malloc(sizeof(int32_t) * (size));
+		if (!array || !copyArray) {
+			fprintf(stderr, "malloc failed");
+			return 1;
+		}
+		for (unsigned int j = 0; j < size; j++) {
+			array[j] = rand();
+			copyArray[j] = array[j];
+		}
 		func(array, size);
-		for (unsigned int j = 0; j < size - 1; j++) {
-			if(array[j] > array[j + 1]) {
+		qsort(copyArray, size, sizeof(int32_t), comparatorTest); // trusted sort
+		for (size_t j = 0; j < size; j++) {
+			if(array[j] != copyArray[j]) {
 				fprintf(stderr, "test failed!\n");
 				return 1;
 			}

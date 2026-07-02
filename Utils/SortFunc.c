@@ -10,10 +10,11 @@ typedef struct sortFunc {
 } sortFunc;
 
 static const sortFunc map[] = {
-	{"MergeSort_Naive", mergeSortNaive},
-	{"MergeSort_2Array", mergeSort2Array},
-	{"MergeSort_MultiThreaded", mergeSortMultiThreaded},
-	{"qsort", qsortWrapper}
+	{"MS_Naive", mergeSortNaive},
+	{"MS_2Array", mergeSort2Array},
+	{"MS_Parallel", mergeSortMultiThreaded},
+	{"qsort", qsortWrapper},
+	{"insertion", insertionSort}
 };
 
 void (*findFunc(char* sortName))(int32_t*, size_t) {
