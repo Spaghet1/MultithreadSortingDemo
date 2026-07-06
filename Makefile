@@ -7,7 +7,9 @@ VPATH = $(SRC_DIRS)
 SRCS = $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/*.c))
 OBJS = $(patsubst %.c, ObjectFiles/%.o, $(notdir $(SRCS)))
 
-test: $(OBJS) ObjectFiles/testsort.o
+all: benchmark test
+
+test: $(OBJS) ObjectFiles/testSort.o
 	$(CC) $(CFLAGS) $^ -o testsort
 
 benchmark: $(OBJS) ObjectFiles/benchmark.o
@@ -28,5 +30,8 @@ ObjectFiles/benchmark.o: benchmark.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm testsort
-	rm benchmark
+	rm -f testsort benchmark
+
+cleanall:
+	rm -f testsort benchmark
+	rm -r ObjectFiles
