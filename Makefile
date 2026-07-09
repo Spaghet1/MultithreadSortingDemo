@@ -9,7 +9,7 @@ OBJS = $(patsubst %.c, ObjectFiles/%.o, $(notdir $(SRCS)))
 
 all: benchmark test
 
-test: $(OBJS) ObjectFiles/testSort.o
+test: $(OBJS) ObjectFiles/testsort.o
 	$(CC) $(CFLAGS) $^ -o testsort
 
 benchmark: $(OBJS) ObjectFiles/benchmark.o
@@ -21,7 +21,7 @@ ObjectFiles/%.o: %.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
-ObjectFiles/testsort.o: testSort.c
+ObjectFiles/testsort.o: testsort.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
@@ -35,3 +35,4 @@ clean:
 cleanall:
 	rm -f testsort benchmark
 	rm -r ObjectFiles
+	rm  cachegrind*

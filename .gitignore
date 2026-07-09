@@ -2,3 +2,4 @@ a.out*
 ObjectFiles
 benchmark
 testsort
+cachegrind*

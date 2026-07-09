@@ -51,6 +51,8 @@ int main(int argc, char** argv) {
 			}
 		}
 		// printf("test succeeded\n");
+		free(array);
+		free(copyArray);
 	}
 	printf("all tests succeeded\n");
 	return 0;

@@ -33,5 +33,6 @@ int main(int argc, char** argv) {
 	func(array, size);
 	clock_gettime(CLOCK_MONOTONIC, &end);
 	printf("%f\n", timespecToDouble(timeDiff(start, end)));
+	free(array);
 	return 0;
 }
