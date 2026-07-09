@@ -21,7 +21,7 @@ ObjectFiles/%.o: %.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
-ObjectFiles/testsort.o: testsort.c
+ObjectFiles/testsort.o: testSort.c
 	mkdir -p ObjectFiles
 	$(CC) $(CFLAGS) -c $< -o $@
 
