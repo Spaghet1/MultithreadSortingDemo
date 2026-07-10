@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "../MiscSorts/miscsort.h"
 #include "../MergeSorts/mergesort.h"
+#include "../QuickSorts/quicksort.h"
 #include "SortFunc.h"
 
 typedef struct sortFunc {
@@ -14,7 +15,9 @@ static const sortFunc map[] = {
 	{"MS_2Array", mergeSort2Array},
 	{"MS_Parallel", mergeSortMultiThreaded},
 	{"qsort", qsortWrapper},
-	{"insertion", insertionSort}
+	{"insertion", insertionSort},
+	{"QS_Base", quickSortBase},
+	{"QS_Parallel", quickSortParallel}
 };
 
 void (*findFunc(char* sortName))(int32_t*, size_t) {

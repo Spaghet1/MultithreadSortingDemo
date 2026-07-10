@@ -7,13 +7,13 @@
 #include <time.h>
 
 #define MAX_ITERATIONS 100
-#define MAX_SIZE 10000
+#define MAX_SIZE 20
 
 int comparatorTest(const void* a, const void* b) {
 	return (*(int32_t*)a - *(int32_t*)b);
 }
 
-extern int threadDepth;
+int threadDepth;
 
 int main(int argc, char** argv) {
 	if (argc < 2 || argc > 3) {

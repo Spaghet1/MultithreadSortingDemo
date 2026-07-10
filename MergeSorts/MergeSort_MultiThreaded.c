@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern int threadDepth;
+
 typedef struct HelperArgs {
 	int32_t* fromArray;
 	int32_t* toArray;
@@ -10,8 +12,6 @@ typedef struct HelperArgs {
 	size_t right;
 	int depth;
 } HelperArgs;
-
-int threadDepth;
 
 static void merge(int32_t* toArray, int32_t* fromArray, size_t left, size_t right) {
 	size_t leftPtr = left;

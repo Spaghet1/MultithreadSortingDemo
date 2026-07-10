@@ -6,7 +6,7 @@
 #include <time.h>
 #include <string.h>
 
-extern int threadDepth;
+int threadDepth;
 
 int main(int argc, char** argv) {
 	if (argc < 3 || argc > 4) {
